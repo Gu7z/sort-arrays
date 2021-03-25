@@ -35,33 +35,9 @@
       // console.log("selectionSort", selectionSort);
     </script>
 
+    <script src="/dataSets/random.js"></script>
+
     <script>
-      const makeBubbleSortDataSetRandom = () => {
-        const { bubbleSort_random } = bubbleSort;
-
-        const newData = [];
-
-        for (let each in bubbleSort_random[0]) {
-          newData.push(
-            bubbleSort_random[0][each],
-            bubbleSort_random[1][each],
-            bubbleSort_random[2][each]
-          );
-        }
-
-        const bubbleSortDataSet = {
-          data: newData,
-          label: "bubbleSort",
-          borderColor: "#50AD1A",
-          fill: false,
-        };
-
-        return bubbleSortDataSet;
-      };
-
-      const dataSetsRandom = [];
-      dataSetsRandom.push(makeBubbleSortDataSetRandom());
-
       var ctx = document.getElementById("random").getContext("2d");
       var myLineChart = new Chart(document.getElementById("random"), {
         type: "line",
