@@ -1,42 +1,52 @@
 const sorted_10 = require("../../sets/sorted/sorted_10");
+const sorted_20 = require("../../sets/sorted/sorted_20");
+const sorted_30 = require("../../sets/sorted/sorted_30");
 const sorted_100 = require("../../sets/sorted/sorted_100");
+const sorted_200 = require("../../sets/sorted/sorted_200");
+const sorted_300 = require("../../sets/sorted/sorted_300");
 const sorted_1000 = require("../../sets/sorted/sorted_1000");
+const sorted_2000 = require("../../sets/sorted/sorted_2000");
+const sorted_3000 = require("../../sets/sorted/sorted_3000");
+const sorted_10000 = require("../../sets/sorted/sorted_10000");
+const sorted_20000 = require("../../sets/sorted/sorted_20000");
+const sorted_30000 = require("../../sets/sorted/sorted_30000");
 const runCode = require("../../utils/runCode");
 const calculaMedia = require("../../utils/calculaMedia");
 const insertionSort = require("../../algorithms/insertionSort");
 
-let time_sorted_10 = [];
-let time_sorted_100 = [];
-let time_sorted_1000 = [];
+const ten = [sorted_10, sorted_100, sorted_1000, sorted_10000];
+const twenty = [sorted_20, sorted_200, sorted_2000, sorted_20000];
+const thirty = [sorted_30, sorted_300, sorted_3000, sorted_30000];
 
-runCode(insertionSort, sorted_10, time_sorted_10);
-runCode(insertionSort, sorted_10, time_sorted_10);
-runCode(insertionSort, sorted_10, time_sorted_10);
-const insertionSort_sorted_10 = calculaMedia(
-  "insertionSort_sorted_10",
-  time_sorted_10
-);
+const timesortedTen = [[], [], [], []];
 
-runCode(insertionSort, sorted_100, time_sorted_100);
-runCode(insertionSort, sorted_100, time_sorted_100);
-runCode(insertionSort, sorted_100, time_sorted_100);
-const insertionSort_sorted_100 = calculaMedia(
-  "insertionSort_sorted_100",
-  time_sorted_100
-);
+const timesortedTwenty = [[], [], [], []];
 
-runCode(insertionSort, sorted_1000, time_sorted_1000);
-runCode(insertionSort, sorted_1000, time_sorted_1000);
-runCode(insertionSort, sorted_1000, time_sorted_1000);
-const insertionSort_sorted_1000 = calculaMedia(
-  "insertionSort_sorted_1000",
-  time_sorted_1000
-);
+const timesortedThirty = [[], [], [], []];
 
-const average = [
-  insertionSort_sorted_10,
-  insertionSort_sorted_100,
-  insertionSort_sorted_1000,
-];
+const insertionSort_sorted = [[], [], []];
 
-module.exports = average;
+for (const index in ten) {
+  runCode(insertionSort, ten[index], timesortedTen[index]);
+  runCode(insertionSort, ten[index], timesortedTen[index]);
+  runCode(insertionSort, ten[index], timesortedTen[index]);
+  insertionSort_sorted[0].push(calculaMedia(timesortedTen[index]));
+}
+
+for (const index in twenty) {
+  runCode(insertionSort, twenty[index], timesortedTwenty[index]);
+  runCode(insertionSort, twenty[index], timesortedTwenty[index]);
+  runCode(insertionSort, twenty[index], timesortedTwenty[index]);
+  insertionSort_sorted[1].push(calculaMedia(timesortedTwenty[index]));
+}
+
+for (const index in thirty) {
+  runCode(insertionSort, thirty[index], timesortedThirty[index]);
+  runCode(insertionSort, thirty[index], timesortedThirty[index]);
+  runCode(insertionSort, thirty[index], timesortedThirty[index]);
+  insertionSort_sorted[2].push(calculaMedia(timesortedThirty[index]));
+}
+
+console.log("cabei o sorted do bubble");
+
+module.exports = insertionSort_sorted;
