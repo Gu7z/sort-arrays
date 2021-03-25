@@ -1,42 +1,52 @@
 const random_10 = require("../../sets/random/random_10");
+const random_20 = require("../../sets/random/random_20");
+const random_30 = require("../../sets/random/random_30");
 const random_100 = require("../../sets/random/random_100");
+const random_200 = require("../../sets/random/random_200");
+const random_300 = require("../../sets/random/random_300");
 const random_1000 = require("../../sets/random/random_1000");
+const random_2000 = require("../../sets/random/random_2000");
+const random_3000 = require("../../sets/random/random_3000");
+const random_10000 = require("../../sets/random/random_10000");
+const random_20000 = require("../../sets/random/random_20000");
+const random_30000 = require("../../sets/random/random_30000");
 const runCode = require("../../utils/runCode");
 const calculaMedia = require("../../utils/calculaMedia");
 const selectionSort = require("../../algorithms/selectionSort");
 
-let time_random_10 = [];
-let time_random_100 = [];
-let time_random_1000 = [];
+const ten = [random_10, random_100, random_1000, random_10000];
+const twenty = [random_20, random_200, random_2000, random_20000];
+const thirty = [random_30, random_300, random_3000, random_30000];
 
-runCode(selectionSort, random_10, time_random_10);
-runCode(selectionSort, random_10, time_random_10);
-runCode(selectionSort, random_10, time_random_10);
-const selectionSort_random_10 = calculaMedia(
-  "selectionSort_random_10",
-  time_random_10
-);
+const timerandomTen = [[], [], [], []];
 
-runCode(selectionSort, random_100, time_random_100);
-runCode(selectionSort, random_100, time_random_100);
-runCode(selectionSort, random_100, time_random_100);
-const selectionSort_random_100 = calculaMedia(
-  "selectionSort_random_100",
-  time_random_100
-);
+const timerandomTwenty = [[], [], [], []];
 
-runCode(selectionSort, random_1000, time_random_1000);
-runCode(selectionSort, random_1000, time_random_1000);
-runCode(selectionSort, random_1000, time_random_1000);
-const selectionSort_random_1000 = calculaMedia(
-  "selectionSort_random_1000",
-  time_random_1000
-);
+const timerandomThirty = [[], [], [], []];
 
-const average = [
-  selectionSort_random_10,
-  selectionSort_random_100,
-  selectionSort_random_1000,
-];
+const selectionSort_random = [[], [], []];
 
-module.exports = average;
+for (const index in ten) {
+  runCode(selectionSort, ten[index], timerandomTen[index]);
+  runCode(selectionSort, ten[index], timerandomTen[index]);
+  runCode(selectionSort, ten[index], timerandomTen[index]);
+  selectionSort_random[0].push(calculaMedia(timerandomTen[index]));
+}
+
+for (const index in twenty) {
+  runCode(selectionSort, twenty[index], timerandomTwenty[index]);
+  runCode(selectionSort, twenty[index], timerandomTwenty[index]);
+  runCode(selectionSort, twenty[index], timerandomTwenty[index]);
+  selectionSort_random[1].push(calculaMedia(timerandomTwenty[index]));
+}
+
+for (const index in thirty) {
+  runCode(selectionSort, thirty[index], timerandomThirty[index]);
+  runCode(selectionSort, thirty[index], timerandomThirty[index]);
+  runCode(selectionSort, thirty[index], timerandomThirty[index]);
+  selectionSort_random[2].push(calculaMedia(timerandomThirty[index]));
+}
+
+console.log("cabei o random do bubble");
+
+module.exports = selectionSort_random;
