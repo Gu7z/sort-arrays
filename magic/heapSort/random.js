@@ -1,35 +1,52 @@
 const random_10 = require("../../sets/random/random_10");
+const random_20 = require("../../sets/random/random_20");
+const random_30 = require("../../sets/random/random_30");
 const random_100 = require("../../sets/random/random_100");
+const random_200 = require("../../sets/random/random_200");
+const random_300 = require("../../sets/random/random_300");
 const random_1000 = require("../../sets/random/random_1000");
+const random_2000 = require("../../sets/random/random_2000");
+const random_3000 = require("../../sets/random/random_3000");
+const random_10000 = require("../../sets/random/random_10000");
+const random_20000 = require("../../sets/random/random_20000");
+const random_30000 = require("../../sets/random/random_30000");
 const runCode = require("../../utils/runCode");
 const calculaMedia = require("../../utils/calculaMedia");
 const heapSort = require("../../algorithms/heapSort");
 
-let time_random_10 = [];
-let time_random_100 = [];
-let time_random_1000 = [];
+const ten = [random_10, random_100, random_1000, random_10000];
+const twenty = [random_20, random_200, random_2000, random_20000];
+const thirty = [random_30, random_300, random_3000, random_30000];
 
-runCode(heapSort, random_10, time_random_10);
-runCode(heapSort, random_10, time_random_10);
-runCode(heapSort, random_10, time_random_10);
-const heapSort_random_10 = calculaMedia("heapSort_random_10", time_random_10);
+const timerandomTen = [[], [], [], []];
 
-runCode(heapSort, random_100, time_random_100);
-runCode(heapSort, random_100, time_random_100);
-runCode(heapSort, random_100, time_random_100);
-const heapSort_random_100 = calculaMedia(
-  "heapSort_random_100",
-  time_random_100
-);
+const timerandomTwenty = [[], [], [], []];
 
-runCode(heapSort, random_1000, time_random_1000);
-runCode(heapSort, random_1000, time_random_1000);
-runCode(heapSort, random_1000, time_random_1000);
-const heapSort_random_1000 = calculaMedia(
-  "heapSort_random_1000",
-  time_random_1000
-);
+const timerandomThirty = [[], [], [], []];
 
-const average = [heapSort_random_10, heapSort_random_100, heapSort_random_1000];
+const heapSort_random = [[], [], []];
 
-module.exports = average;
+for (const index in ten) {
+  runCode(heapSort, ten[index], timerandomTen[index]);
+  runCode(heapSort, ten[index], timerandomTen[index]);
+  runCode(heapSort, ten[index], timerandomTen[index]);
+  heapSort_random[0].push(calculaMedia(timerandomTen[index]));
+}
+
+for (const index in twenty) {
+  runCode(heapSort, twenty[index], timerandomTwenty[index]);
+  runCode(heapSort, twenty[index], timerandomTwenty[index]);
+  runCode(heapSort, twenty[index], timerandomTwenty[index]);
+  heapSort_random[1].push(calculaMedia(timerandomTwenty[index]));
+}
+
+for (const index in thirty) {
+  runCode(heapSort, thirty[index], timerandomThirty[index]);
+  runCode(heapSort, thirty[index], timerandomThirty[index]);
+  runCode(heapSort, thirty[index], timerandomThirty[index]);
+  heapSort_random[2].push(calculaMedia(timerandomThirty[index]));
+}
+
+console.log("cabei o random do bubble");
+
+module.exports = heapSort_random;
