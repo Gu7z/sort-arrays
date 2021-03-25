@@ -47,6 +47,6 @@ for (const index in thirty) {
   mergeSort_invert[2].push(calculaMedia(timeinvertThirty[index]));
 }
 
-console.log("cabei o invert do bubble");
+console.log("cabei o invert do merge");
 
 module.exports = mergeSort_invert;

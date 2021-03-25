@@ -47,6 +47,6 @@ for (const index in thirty) {
   quickSort_sorted[2].push(calculaMedia(timesortedThirty[index]));
 }
 
-console.log("cabei o sorted do bubble");
+console.log("cabei o sorted do quick");
 
 module.exports = quickSort_sorted;

@@ -47,6 +47,6 @@ for (const index in thirty) {
   selectionSort_random[2].push(calculaMedia(timerandomThirty[index]));
 }
 
-console.log("cabei o random do bubble");
+console.log("cabei o random do selection");
 
 module.exports = selectionSort_random;
