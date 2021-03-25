@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="random" width="400" height="400"></canvas>
+    <canvas id="sorted" width="400" height="400"></canvas>
+    <canvas id="invert" width="400" height="400"></canvas>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+      integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const getCookieValue = (name) =>
+        document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)")?.pop() ||
+        "";
+      const bubbleSort = JSON.parse(getCookieValue("bubbleSort"));
+      const heapSort = JSON.parse(getCookieValue("heapSort"));
+      const insertionSort = JSON.parse(getCookieValue("insertionSort"));
+      const mergeSort = JSON.parse(getCookieValue("mergeSort"));
+      const quickSort = JSON.parse(getCookieValue("quickSort"));
+      const selectionSort = JSON.parse(getCookieValue("selectionSort"));
+
+      console.log("bubbleSort", bubbleSort);
+      // console.log("heapSort", heapSort);
+      // console.log("insertionSort", insertionSort);
+      // console.log("mergeSort", mergeSort);
+      // console.log("quickSort", quickSort);
+      // console.log("selectionSort", selectionSort);
+    </script>
+
+    <script>
+      const makeBubbleSortDataSetRandom = () => {
+        const { bubbleSort_random } = bubbleSort;
+
+        const newData = [];
+
+        for (let each in bubbleSort_random[0]) {
+          newData.push(
+            bubbleSort_random[0][each],
+            bubbleSort_random[1][each],
+            bubbleSort_random[2][each]
+          );
+        }
+
+        const bubbleSortDataSet = {
+          data: newData,
+          label: "bubbleSort",
+          borderColor: "#50AD1A",
+          fill: false,
+        };
+
+        return bubbleSortDataSet;
+      };
+
+      const dataSetsRandom = [];
+      dataSetsRandom.push(makeBubbleSortDataSetRandom());
+
+      var ctx = document.getElementById("random").getContext("2d");
+      var myLineChart = new Chart(document.getElementById("random"), {
+        type: "line",
+        data: {
+          labels: [
+            10,
+            20,
+            30,
+            100,
+            200,
+            300,
+            1000,
+            2000,
+            3000,
+            10000,
+            20000,
+            30000,
+          ],
+          datasets: dataSetsRandom,
+        },
+        options: {
+          title: {
+            display: true,
+            text: "Sorting random array",
+          },
+        },
+      });
+    </script>
+
+    <script>
+      const makeBubbleSortDataSetInvert = () => {
+        const { bubbleSort_invert } = bubbleSort;
+
+        const newData = [];
+
+        for (let each in bubbleSort_invert[0]) {
+          newData.push(
+            bubbleSort_invert[0][each],
+            bubbleSort_invert[1][each],
+            bubbleSort_invert[2][each]
+          );
+        }
+
+        const bubbleSortDataSet = {
+          data: newData,
+          label: "bubbleSort",
+          borderColor: "#50AD1A",
+          fill: false,
+        };
+
+        return bubbleSortDataSet;
+      };
+
+      const dataSetsInvert = [];
+      dataSetsInvert.push(makeBubbleSortDataSetInvert());
+
+      var ctx = document.getElementById("invert").getContext("2d");
+      var myLineChart = new Chart(document.getElementById("invert"), {
+        type: "line",
+        data: {
+          labels: [
+            10,
+            20,
+            30,
+            100,
+            200,
+            300,
+            1000,
+            2000,
+            3000,
+            10000,
+            20000,
+            30000,
+          ],
+          datasets: dataSetsInvert,
+        },
+        options: {
+          title: {
+            display: true,
+            text: "Sorting Invert array",
+          },
+        },
+      });
+    </script>
+
+    <script>
+      const makeBubbleSortDataSetSorted = () => {
+        const { bubbleSort_sorted } = bubbleSort;
+
+        const newData = [];
+
+        for (let each in bubbleSort_sorted[0]) {
+          newData.push(
+            bubbleSort_sorted[0][each],
+            bubbleSort_sorted[1][each],
+            bubbleSort_sorted[2][each]
+          );
+        }
+
+        const bubbleSortDataSet = {
+          data: newData,
+          label: "bubbleSort",
+          borderColor: "#50AD1A",
+          fill: false,
+        };
+
+        return bubbleSortDataSet;
+      };
+
+      const dataSetsSorted = [];
+      dataSetsSorted.push(makeBubbleSortDataSetSorted());
+
+      var ctx = document.getElementById("sorted").getContext("2d");
+      var myLineChart = new Chart(document.getElementById("sorted"), {
+        type: "line",
+        data: {
+          labels: [
+            10,
+            20,
+            30,
+            100,
+            200,
+            300,
+            1000,
+            2000,
+            3000,
+            10000,
+            20000,
+            30000,
+          ],
+          datasets: dataSetsSorted,
+        },
+        options: {
+          title: {
+            display: true,
+            text: "Sorting sorted array",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
