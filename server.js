@@ -5,6 +5,8 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
+console.log("Ja pode abrir o server");
+
 app.use("/", (req, res) => {
   const {
     bubbleSort,
