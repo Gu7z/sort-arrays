@@ -62,6 +62,4 @@ for (const index in thirty) {
   bubbleSort_invert[2].push(calculaMedia(timeinvertThirty[index]));
 }
 
-console.log("cabei o invert do bubble");
-
 module.exports = bubbleSort_invert;

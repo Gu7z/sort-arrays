@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "perfy": "^1.1.5"
+    "perfy": "^1.1.5",
+    "run-parallel": "^1.2.0",
+    "task.js": "^0.1.5"
   }
 }

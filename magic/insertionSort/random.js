@@ -62,6 +62,4 @@ for (const index in thirty) {
   insertionSort_random[2].push(calculaMedia(timerandomThirty[index]));
 }
 
-console.log("cabei o random do insertion");
-
 module.exports = insertionSort_random;

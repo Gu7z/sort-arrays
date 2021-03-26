@@ -62,6 +62,4 @@ for (const index in thirty) {
   heapSort_sorted[2].push(calculaMedia(timesortedThirty[index]));
 }
 
-console.log("cabei o sorted do sorted");
-
 module.exports = heapSort_sorted;

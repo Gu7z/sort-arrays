@@ -62,6 +62,4 @@ for (const index in thirty) {
   mergeSort_sorted[2].push(calculaMedia(timesortedThirty[index]));
 }
 
-console.log("cabei o sorted do merge");
-
 module.exports = mergeSort_sorted;

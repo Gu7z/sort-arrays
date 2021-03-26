@@ -62,6 +62,4 @@ for (const index in thirty) {
   insertionSort_sorted[2].push(calculaMedia(timesortedThirty[index]));
 }
 
-console.log("cabei o sorted do insertion");
-
 module.exports = insertionSort_sorted;

@@ -62,6 +62,4 @@ for (const index in thirty) {
   bubbleSort_sorted[2].push(calculaMedia(timesortedThirty[index]));
 }
 
-console.log("cabei o sorted do bubble");
-
 module.exports = bubbleSort_sorted;
