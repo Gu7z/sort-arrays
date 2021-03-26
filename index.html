@@ -26,16 +26,11 @@
       const mergeSort = JSON.parse(getCookieValue("mergeSort"));
       const quickSort = JSON.parse(getCookieValue("quickSort"));
       const selectionSort = JSON.parse(getCookieValue("selectionSort"));
-
-      console.log("bubbleSort", bubbleSort);
-      // console.log("heapSort", heapSort);
-      // console.log("insertionSort", insertionSort);
-      // console.log("mergeSort", mergeSort);
-      // console.log("quickSort", quickSort);
-      // console.log("selectionSort", selectionSort);
     </script>
 
     <script src="/dataSets/random.js"></script>
+    <script src="/dataSets/invert.js"></script>
+    <script src="/dataSets/sorted.js"></script>
 
     <script>
       var ctx = document.getElementById("random").getContext("2d");
@@ -68,32 +63,6 @@
     </script>
 
     <script>
-      const makeBubbleSortDataSetInvert = () => {
-        const { bubbleSort_invert } = bubbleSort;
-
-        const newData = [];
-
-        for (let each in bubbleSort_invert[0]) {
-          newData.push(
-            bubbleSort_invert[0][each],
-            bubbleSort_invert[1][each],
-            bubbleSort_invert[2][each]
-          );
-        }
-
-        const bubbleSortDataSet = {
-          data: newData,
-          label: "bubbleSort",
-          borderColor: "#50AD1A",
-          fill: false,
-        };
-
-        return bubbleSortDataSet;
-      };
-
-      const dataSetsInvert = [];
-      dataSetsInvert.push(makeBubbleSortDataSetInvert());
-
       var ctx = document.getElementById("invert").getContext("2d");
       var myLineChart = new Chart(document.getElementById("invert"), {
         type: "line",
@@ -117,39 +86,13 @@
         options: {
           title: {
             display: true,
-            text: "Sorting Invert array",
+            text: "Sorting invert array",
           },
         },
       });
     </script>
 
     <script>
-      const makeBubbleSortDataSetSorted = () => {
-        const { bubbleSort_sorted } = bubbleSort;
-
-        const newData = [];
-
-        for (let each in bubbleSort_sorted[0]) {
-          newData.push(
-            bubbleSort_sorted[0][each],
-            bubbleSort_sorted[1][each],
-            bubbleSort_sorted[2][each]
-          );
-        }
-
-        const bubbleSortDataSet = {
-          data: newData,
-          label: "bubbleSort",
-          borderColor: "#50AD1A",
-          fill: false,
-        };
-
-        return bubbleSortDataSet;
-      };
-
-      const dataSetsSorted = [];
-      dataSetsSorted.push(makeBubbleSortDataSetSorted());
-
       var ctx = document.getElementById("sorted").getContext("2d");
       var myLineChart = new Chart(document.getElementById("sorted"), {
         type: "line",
