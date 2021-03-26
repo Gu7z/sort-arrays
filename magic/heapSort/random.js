@@ -10,19 +10,34 @@ const random_3000 = require("../../sets/random/random_3000");
 const random_10000 = require("../../sets/random/random_10000");
 const random_20000 = require("../../sets/random/random_20000");
 const random_30000 = require("../../sets/random/random_30000");
+const random_100000 = require("../../sets/random/random_100000");
+const random_200000 = require("../../sets/random/random_200000");
+const random_300000 = require("../../sets/random/random_300000");
 const runCode = require("../../utils/runCode");
 const calculaMedia = require("../../utils/calculaMedia");
 const heapSort = require("../../algorithms/heapSort");
 
-const ten = [random_10, random_100, random_1000, random_10000];
-const twenty = [random_20, random_200, random_2000, random_20000];
-const thirty = [random_30, random_300, random_3000, random_30000];
+const ten = [random_10, random_100, random_1000, random_10000, random_100000];
+const twenty = [
+  random_20,
+  random_200,
+  random_2000,
+  random_20000,
+  random_200000,
+];
+const thirty = [
+  random_30,
+  random_300,
+  random_3000,
+  random_30000,
+  random_300000,
+];
 
-const timerandomTen = [[], [], [], []];
+const timerandomTen = [[], [], [], [], []];
 
-const timerandomTwenty = [[], [], [], []];
+const timerandomTwenty = [[], [], [], [], []];
 
-const timerandomThirty = [[], [], [], []];
+const timerandomThirty = [[], [], [], [], []];
 
 const heapSort_random = [[], [], []];
 
@@ -47,6 +62,6 @@ for (const index in thirty) {
   heapSort_random[2].push(calculaMedia(timerandomThirty[index]));
 }
 
-console.log("cabei o random do heap");
+console.log("cabei o random do random");
 
 module.exports = heapSort_random;

@@ -10,19 +10,34 @@ const sorted_3000 = require("../../sets/sorted/sorted_3000");
 const sorted_10000 = require("../../sets/sorted/sorted_10000");
 const sorted_20000 = require("../../sets/sorted/sorted_20000");
 const sorted_30000 = require("../../sets/sorted/sorted_30000");
+const sorted_100000 = require("../../sets/sorted/sorted_100000");
+const sorted_200000 = require("../../sets/sorted/sorted_200000");
+const sorted_300000 = require("../../sets/sorted/sorted_300000");
 const runCode = require("../../utils/runCode");
 const calculaMedia = require("../../utils/calculaMedia");
 const heapSort = require("../../algorithms/heapSort");
 
-const ten = [sorted_10, sorted_100, sorted_1000, sorted_10000];
-const twenty = [sorted_20, sorted_200, sorted_2000, sorted_20000];
-const thirty = [sorted_30, sorted_300, sorted_3000, sorted_30000];
+const ten = [sorted_10, sorted_100, sorted_1000, sorted_10000, sorted_100000];
+const twenty = [
+  sorted_20,
+  sorted_200,
+  sorted_2000,
+  sorted_20000,
+  sorted_200000,
+];
+const thirty = [
+  sorted_30,
+  sorted_300,
+  sorted_3000,
+  sorted_30000,
+  sorted_300000,
+];
 
-const timesortedTen = [[], [], [], []];
+const timesortedTen = [[], [], [], [], []];
 
-const timesortedTwenty = [[], [], [], []];
+const timesortedTwenty = [[], [], [], [], []];
 
-const timesortedThirty = [[], [], [], []];
+const timesortedThirty = [[], [], [], [], []];
 
 const heapSort_sorted = [[], [], []];
 
@@ -47,6 +62,6 @@ for (const index in thirty) {
   heapSort_sorted[2].push(calculaMedia(timesortedThirty[index]));
 }
 
-console.log("cabei o sorted do heap");
+console.log("cabei o sorted do sorted");
 
 module.exports = heapSort_sorted;
