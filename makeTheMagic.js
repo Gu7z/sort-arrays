@@ -1,6 +1,6 @@
-const quicksort_random = require("./magic/quickSort/random");
-const quicksort_sorted = require("./magic/quickSort/sorted");
-const quicksort_invert = require("./magic/quickSort/invert");
+const quickSort_random = require("./magic/quickSort/random");
+const quickSort_sorted = require("./magic/quickSort/sorted");
+const quickSort_invert = require("./magic/quickSort/invert");
 
 const insertionSort_random = require("./magic/insertionSort/random");
 const insertionSort_sorted = require("./magic/insertionSort/sorted");
@@ -44,9 +44,9 @@ const averages = {
     mergeSort_invert,
   },
   quickSort: {
-    quicksort_random,
-    quicksort_sorted,
-    quicksort_invert,
+    quickSort_random,
+    quickSort_sorted,
+    quickSort_invert,
   },
   insertionSort: {
     insertionSort_random,
