@@ -1,46 +1,47 @@
-// create max heap
-function maxHeap(input, i, arrLength) {
-  const left = 2 * i + 1;
-  const right = 2 * i + 2;
-  let max = i;
+var array_length;
+/* to create MAX  array */
+function heap_root(input, i) {
+  var left = 2 * i + 1;
+  var right = 2 * i + 2;
+  var max = i;
 
-  if (left < arrLength && input[left] > input[max]) {
+  if (left < array_length && input[left] > input[max]) {
     max = left;
   }
 
-  if (right < arrLength && input[right] > input[max]) {
+  if (right < array_length && input[right] > input[max]) {
     max = right;
   }
 
   if (max != i) {
     swap(input, i, max);
-    maxHeap(input, max, arrLength);
+    heap_root(input, max);
   }
 }
 
-const swap = (input, indexA, indexB) => {
-  const temp = input[indexA];
+function swap(input, index_A, index_B) {
+  var temp = input[index_A];
 
-  input[indexA] = input[indexB];
-  input[indexB] = temp;
-};
+  input[index_A] = input[index_B];
+  input[index_B] = temp;
+}
 
-const heapSort = (input) => {
-  const output = [...input];
-  let arrLength = output.length;
+function heapSort(input) {
+  const array = [...input];
+  array_length = array.length;
 
-  for (let i = Math.floor(arrLength / 2); i >= 0; i -= 1) {
-    maxHeap(output, i, arrLength);
+  for (var i = Math.floor(array_length / 2); i >= 0; i -= 1) {
+    heap_root(array, i);
   }
 
-  for (let i = output.length - 1; i > 0; i--) {
-    swap(output, 0, i);
-    arrLength--;
+  for (i = array.length - 1; i > 0; i--) {
+    swap(array, 0, i);
+    array_length--;
 
-    maxHeap(output, 0, arrLength);
+    heap_root(array, 0);
   }
 
-  return output;
-};
+  return array;
+}
 
 module.exports = heapSort;

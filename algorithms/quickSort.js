@@ -1,46 +1,28 @@
-function swap(items, leftIndex, rightIndex) {
-  var temp = items[leftIndex];
-  items[leftIndex] = items[rightIndex];
-  items[rightIndex] = temp;
-}
+function quickSortIterative(array) {
+  const arr = [...array];
+  stack = [];
 
-function partition(items, left, right) {
-  var pivot = items[Math.floor((right + left) / 2)],
-    i = left,
-    j = right;
-  while (i <= j) {
-    while (items[i] < pivot) {
-      i++;
+  stack.push(0);
+  stack.push(arr.length - 1);
+
+  while (stack[stack.length - 1] >= 0) {
+    end = stack.pop();
+    start = stack.pop();
+
+    pivotIndex = partition(arr, start, end);
+
+    if (pivotIndex - 1 > start) {
+      stack.push(start);
+      stack.push(pivotIndex - 1);
     }
-    while (items[j] > pivot) {
-      j--;
-    }
-    if (i <= j) {
-      swap(items, i, j);
-      i++;
-      j--;
+
+    if (pivotIndex + 1 < end) {
+      stack.push(pivotIndex + 1);
+      stack.push(end);
     }
   }
-  return i;
+
+  return arr;
 }
 
-const quickSort = (items) => {
-  const newArray = [...items];
-  const middle = Math.floor(newArray.length / 2);
-  const right = newArray.slice(middle, items.length);
-  const left = newArray.slice(0, middle);
-
-  var index;
-  if (newArray.length > 1) {
-    index = partition(newArray, left, right);
-    if (left < index - 1) {
-      quickSort(newArray, left, index - 1);
-    }
-    if (index < right) {
-      quickSort(newArray, index, right);
-    }
-  }
-  return newArray;
-};
-
-module.exports = quickSort;
+module.exports = quickSortIterative;

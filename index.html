@@ -26,6 +26,24 @@
       const mergeSort = JSON.parse(getCookieValue("mergeSort"));
       const quickSort = JSON.parse(getCookieValue("quickSort"));
       const selectionSort = JSON.parse(getCookieValue("selectionSort"));
+
+      const labels = [
+        10,
+        20,
+        30,
+        100,
+        200,
+        300,
+        1000,
+        2000,
+        3000,
+        10000,
+        20000,
+        30000,
+        100000,
+        200000,
+        300000,
+      ];
     </script>
 
     <script src="/dataSets/random.js"></script>
@@ -37,20 +55,7 @@
       var myLineChart = new Chart(document.getElementById("random"), {
         type: "line",
         data: {
-          labels: [
-            10,
-            20,
-            30,
-            100,
-            200,
-            300,
-            1000,
-            2000,
-            3000,
-            10000,
-            20000,
-            30000,
-          ],
+          labels,
           datasets: dataSetsRandom,
         },
         options: {
@@ -64,23 +69,11 @@
 
     <script>
       var ctx = document.getElementById("invert").getContext("2d");
+      console.log(dataSetsInvert);
       var myLineChart = new Chart(document.getElementById("invert"), {
         type: "line",
         data: {
-          labels: [
-            10,
-            20,
-            30,
-            100,
-            200,
-            300,
-            1000,
-            2000,
-            3000,
-            10000,
-            20000,
-            30000,
-          ],
+          labels,
           datasets: dataSetsInvert,
         },
         options: {
@@ -97,20 +90,7 @@
       var myLineChart = new Chart(document.getElementById("sorted"), {
         type: "line",
         data: {
-          labels: [
-            10,
-            20,
-            30,
-            100,
-            200,
-            300,
-            1000,
-            2000,
-            3000,
-            10000,
-            20000,
-            30000,
-          ],
+          labels,
           datasets: dataSetsSorted,
         },
         options: {
