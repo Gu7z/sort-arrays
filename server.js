@@ -2,7 +2,6 @@ const express = require("express");
 const { spawn } = require("child_process");
 const path = require("path");
 const app = express();
-const express = require("express");
 const { wakeDyno } = require("heroku-keep-awake");
 const PORT = process.env.PORT || 8001;
 const DYNO_URL = "https://sort-array.herokuapp.com/";
