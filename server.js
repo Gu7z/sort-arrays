@@ -2,6 +2,7 @@ const express = require("express");
 const { spawn } = require("child_process");
 const path = require("path");
 const app = express();
+const port = process.env.PORT || 8001;
 
 const averages = {};
 
@@ -69,4 +70,4 @@ app.use("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.listen(8001);
+app.listen(port);
