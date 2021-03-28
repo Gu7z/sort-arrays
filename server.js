@@ -2,7 +2,10 @@ const express = require("express");
 const { spawn } = require("child_process");
 const path = require("path");
 const app = express();
-const port = process.env.PORT || 8001;
+const express = require("express");
+const { wakeDyno } = require("heroku-keep-awake");
+const PORT = process.env.PORT || 8001;
+const DYNO_URL = "https://sort-array.herokuapp.com/";
 
 const averages = {};
 
@@ -70,4 +73,6 @@ app.use("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.listen(port);
+app.listen(PORT, () => {
+  wakeDyno(DYNO_URL); // Use this function when only needing to wake a single Heroku app.
+});
