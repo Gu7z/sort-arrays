@@ -6,9 +6,12 @@
     <title>Document</title>
   </head>
   <body>
-    <canvas id="random" width="400" height="400"></canvas>
-    <canvas id="sorted" width="400" height="400"></canvas>
-    <canvas id="invert" width="400" height="400"></canvas>
+    <div style="text-align: center; margin-left: 25%; margin-right: 25%">
+      <div id="loading"></div>
+      <canvas id="random" width="600" height="600"></canvas>
+      <canvas id="sorted" width="600" height="600"></canvas>
+      <canvas id="invert" width="600" height="600"></canvas>
+    </div>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
@@ -20,12 +23,26 @@
       const getCookieValue = (name) =>
         document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)")?.pop() ||
         "";
-      const bubbleSort = JSON.parse(getCookieValue("bubbleSort"));
-      const heapSort = JSON.parse(getCookieValue("heapSort"));
-      const insertionSort = JSON.parse(getCookieValue("insertionSort"));
-      const mergeSort = JSON.parse(getCookieValue("mergeSort"));
-      const quickSort = JSON.parse(getCookieValue("quickSort"));
-      const selectionSort = JSON.parse(getCookieValue("selectionSort"));
+
+      let bubbleSort;
+      let heapSort;
+      let insertionSort;
+      let mergeSort;
+      let quickSort;
+      let selectionSort;
+
+      try {
+        bubbleSort = JSON.parse(getCookieValue("bubbleSort"));
+        heapSort = JSON.parse(getCookieValue("heapSort"));
+        insertionSort = JSON.parse(getCookieValue("insertionSort"));
+        mergeSort = JSON.parse(getCookieValue("mergeSort"));
+        quickSort = JSON.parse(getCookieValue("quickSort"));
+        selectionSort = JSON.parse(getCookieValue("selectionSort"));
+      } catch {
+        console.log("teste");
+        document.getElementById("loading").innerHTML =
+          "Ainda nao terminou de calcular";
+      }
 
       const labels = [
         10,
