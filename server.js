@@ -27,16 +27,16 @@ const calculateAverages = () => {
   const bubbleSpawn = spawn("node", ["make_the_magic_bubble.js"]);
 
   let finisheds = {
-    heap: false,
-    selection: false,
-    merge: false,
-    insertion: false,
-    bubble: false,
-    quick: false,
+    heapSort: false,
+    selectionSort: false,
+    mergeSort: false,
+    insertionSort: false,
+    bubbleSort: false,
+    quickSort: false,
   };
 
   const allFinisheds = () =>
-    !Object.values(finisheds).find((each) => each === false);
+    Object.values(finisheds).every((each) => each === false);
 
   const save = () => {
     fs.appendFile("averages.json", JSON.stringify(averages), function (err) {
@@ -45,60 +45,32 @@ const calculateAverages = () => {
     });
   };
 
-  quickSpawn.stdout.on("data", function (data) {
-    console.log("Terminou quick");
-    averages["quickSort"] = JSON.parse(data.toString("utf8"));
-    finisheds.quick = true;
+  const saveToAverages = (name, data) => {
+    averages[name] = JSON.parse(data.toString("utf8"));
+    finisheds[name] = true;
+
+    console.log(`finalizou o ${name}`);
 
     if (allFinisheds()) {
       save();
     }
-  });
+  };
 
-  selectionSpawn.stdout.on("data", function (data) {
-    console.log("Terminou selection");
-    averages["selectionSort"] = JSON.parse(data.toString("utf8"));
+  quickSpawn.stdout.on("data", (data) => saveToAverages("quickSort", data));
 
-    if (allFinisheds()) {
-      save();
-    }
-  });
+  selectionSpawn.stdout.on("data", (data) =>
+    saveToAverages("selectionSort", data)
+  );
 
-  mergeSpawn.stdout.on("data", function (data) {
-    console.log("Terminou merge");
-    averages["mergeSort"] = JSON.parse(data.toString("utf8"));
+  mergeSpawn.stdout.on("data", (data) => saveToAverages("mergeSort", data));
 
-    if (allFinisheds()) {
-      save();
-    }
-  });
+  insertionSpawn.stdout.on("data", (data) =>
+    saveToAverages("insertionSort", data)
+  );
 
-  insertionSpawn.stdout.on("data", function (data) {
-    console.log("Terminou insertion");
-    averages["insertionSort"] = JSON.parse(data.toString("utf8"));
+  heapSpawn.stdout.on("data", (data) => saveToAverages("heapSort", data));
 
-    if (allFinisheds()) {
-      save();
-    }
-  });
-
-  heapSpawn.stdout.on("data", function (data) {
-    console.log("Terminou heap");
-    averages["heapSort"] = JSON.parse(data.toString("utf8"));
-
-    if (allFinisheds()) {
-      save();
-    }
-  });
-
-  bubbleSpawn.stdout.on("data", function (data) {
-    console.log("Terminou bubble");
-    averages["bubbleSort"] = JSON.parse(data.toString("utf8"));
-
-    if (allFinisheds()) {
-      save();
-    }
-  });
+  bubbleSpawn.stdout.on("data", (data) => saveToAverages("bubbleSort", data));
 };
 
 if (checkIfFileExists()) {
