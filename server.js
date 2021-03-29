@@ -1,53 +1,113 @@
 const express = require("express");
 const { spawn } = require("child_process");
 const path = require("path");
+const fs = require("fs");
 const app = express();
-const { wakeDyno } = require("heroku-keep-awake");
 const PORT = process.env.PORT || 8001;
-const DYNO_URL = "https://sort-array.herokuapp.com/";
 
-const averages = {};
+let averages = {};
 
-var quickSpawn = spawn("node", ["make_the_magic_quick.js"]);
-var selectionSpawn = spawn("node", ["make_the_magic_selection.js"]);
-var mergeSpawn = spawn("node", ["make_the_magic_merge.js"]);
-var insertionSpawn = spawn("node", ["make_the_magic_insertion.js"]);
-var heapSpawn = spawn("node", ["make_the_magic_heap.js"]);
-var bubbleSpawn = spawn("node", ["make_the_magic_bubble.js"]);
+const checkIfFileExists = () => {
+  return fs.existsSync("./averages.json");
+};
 
-quickSpawn.stdout.on("data", function (data) {
-  console.log("Terminou quick");
-  averages["quickSort"] = JSON.parse(data.toString("utf8"));
-});
+const getAvgFromFile = () => {
+  const rawdata = fs.readFileSync("averages.json");
+  const averages = JSON.parse(rawdata);
 
-selectionSpawn.stdout.on("data", function (data) {
-  console.log("Terminou selection");
-  averages["selectionSort"] = JSON.parse(data.toString("utf8"));
-});
+  return averages;
+};
 
-mergeSpawn.stdout.on("data", function (data) {
-  console.log("Terminou merge");
-  averages["mergeSort"] = JSON.parse(data.toString("utf8"));
-});
+const calculateAverages = () => {
+  const quickSpawn = spawn("node", ["make_the_magic_quick.js"]);
+  const selectionSpawn = spawn("node", ["make_the_magic_selection.js"]);
+  const mergeSpawn = spawn("node", ["make_the_magic_merge.js"]);
+  const insertionSpawn = spawn("node", ["make_the_magic_insertion.js"]);
+  const heapSpawn = spawn("node", ["make_the_magic_heap.js"]);
+  const bubbleSpawn = spawn("node", ["make_the_magic_bubble.js"]);
 
-insertionSpawn.stdout.on("data", function (data) {
-  console.log("Terminou insertion");
-  averages["insertionSort"] = JSON.parse(data.toString("utf8"));
-});
+  let finisheds = {
+    heap: false,
+    selection: false,
+    merge: false,
+    insertion: false,
+    bubble: false,
+    quick: false,
+  };
 
-heapSpawn.stdout.on("data", function (data) {
-  console.log("Terminou heap");
-  averages["heapSort"] = JSON.parse(data.toString("utf8"));
-});
+  const allFinisheds = () =>
+    !Object.values(finisheds).find((each) => each === false);
 
-bubbleSpawn.stdout.on("data", function (data) {
-  console.log("Terminou bubble");
-  averages["bubbleSort"] = JSON.parse(data.toString("utf8"));
-});
+  const save = () => {
+    fs.appendFile("averages.json", JSON.stringify(averages), function (err) {
+      if (err) throw err;
+      console.log("Saved!");
+    });
+  };
+
+  quickSpawn.stdout.on("data", function (data) {
+    console.log("Terminou quick");
+    averages["quickSort"] = JSON.parse(data.toString("utf8"));
+    finisheds.quick = true;
+
+    if (allFinisheds()) {
+      save();
+    }
+  });
+
+  selectionSpawn.stdout.on("data", function (data) {
+    console.log("Terminou selection");
+    averages["selectionSort"] = JSON.parse(data.toString("utf8"));
+
+    if (allFinisheds()) {
+      save();
+    }
+  });
+
+  mergeSpawn.stdout.on("data", function (data) {
+    console.log("Terminou merge");
+    averages["mergeSort"] = JSON.parse(data.toString("utf8"));
+
+    if (allFinisheds()) {
+      save();
+    }
+  });
+
+  insertionSpawn.stdout.on("data", function (data) {
+    console.log("Terminou insertion");
+    averages["insertionSort"] = JSON.parse(data.toString("utf8"));
+
+    if (allFinisheds()) {
+      save();
+    }
+  });
+
+  heapSpawn.stdout.on("data", function (data) {
+    console.log("Terminou heap");
+    averages["heapSort"] = JSON.parse(data.toString("utf8"));
+
+    if (allFinisheds()) {
+      save();
+    }
+  });
+
+  bubbleSpawn.stdout.on("data", function (data) {
+    console.log("Terminou bubble");
+    averages["bubbleSort"] = JSON.parse(data.toString("utf8"));
+
+    if (allFinisheds()) {
+      save();
+    }
+  });
+};
+
+if (checkIfFileExists()) {
+  averages = getAvgFromFile();
+} else {
+  calculateAverages();
+}
 
 app.use(express.static(path.join(__dirname, "public")));
-
-console.log("Ja pode abrir o server");
 
 app.use("/", (req, res) => {
   const {
@@ -58,6 +118,8 @@ app.use("/", (req, res) => {
     quickSort,
     selectionSort,
   } = averages;
+
+  console.log(averages);
 
   res.cookie("bubbleSort", JSON.stringify(bubbleSort), { encode: String });
   res.cookie("heapSort", JSON.stringify(heapSort), { encode: String });
@@ -72,6 +134,4 @@ app.use("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.listen(PORT, () => {
-  wakeDyno(DYNO_URL); // Use this function when only needing to wake a single Heroku app.
-});
+app.listen(PORT);
