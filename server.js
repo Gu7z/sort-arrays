@@ -19,24 +19,24 @@ const getAvgFromFile = () => {
 };
 
 const calculateAverages = () => {
-  const quickSpawn = spawn("node", ["make_the_magic_quick.js"]);
-  const selectionSpawn = spawn("node", ["make_the_magic_selection.js"]);
-  const mergeSpawn = spawn("node", ["make_the_magic_merge.js"]);
-  const insertionSpawn = spawn("node", ["make_the_magic_insertion.js"]);
   const heapSpawn = spawn("node", ["make_the_magic_heap.js"]);
+  const quickSpawn = spawn("node", ["make_the_magic_quick.js"]);
+  const mergeSpawn = spawn("node", ["make_the_magic_merge.js"]);
+  const selectionSpawn = spawn("node", ["make_the_magic_selection.js"]);
+  const insertionSpawn = spawn("node", ["make_the_magic_insertion.js"]);
   const bubbleSpawn = spawn("node", ["make_the_magic_bubble.js"]);
 
   let finisheds = {
     heapSort: false,
-    selectionSort: false,
+    quickSort: false,
     mergeSort: false,
+    selectionSort: false,
     insertionSort: false,
     bubbleSort: false,
-    quickSort: false,
   };
 
   const allFinisheds = () =>
-    Object.values(finisheds).every((each) => each === false);
+    Object.values(finisheds).every((each) => each === true);
 
   const save = () => {
     fs.appendFile("averages.json", JSON.stringify(averages), function (err) {
@@ -56,19 +56,19 @@ const calculateAverages = () => {
     }
   };
 
+  heapSpawn.stdout.on("data", (data) => saveToAverages("heapSort", data));
+
   quickSpawn.stdout.on("data", (data) => saveToAverages("quickSort", data));
+
+  mergeSpawn.stdout.on("data", (data) => saveToAverages("mergeSort", data));
 
   selectionSpawn.stdout.on("data", (data) =>
     saveToAverages("selectionSort", data)
   );
 
-  mergeSpawn.stdout.on("data", (data) => saveToAverages("mergeSort", data));
-
   insertionSpawn.stdout.on("data", (data) =>
     saveToAverages("insertionSort", data)
   );
-
-  heapSpawn.stdout.on("data", (data) => saveToAverages("heapSort", data));
 
   bubbleSpawn.stdout.on("data", (data) => saveToAverages("bubbleSort", data));
 };
